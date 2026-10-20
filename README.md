@@ -66,9 +66,6 @@
   </a>
 </p>
 
-</tr>
-</table>
-
 For more detailed information, check out the [Deltakit documentation](https://deltakit-docs.riverlane.com).
 
 For any usage questions or comments, visit our [Q&A forum](https://github.com/Deltakit/deltakit/discussions/categories/q-a).
@@ -178,12 +175,12 @@ print(circuit)
 
 There are various ways to contribute to `deltakit`:
 
-- **Submitting issues:** To submit bug reports or feature requests, please use our [issue tracker](https://github.com/Deltakit/deltakit/issues).
-- **Developing in `deltakit`:** To learn more about how to develop within `deltakit`, please refer to [contributing guidelines](./docs/CONTRIBUTING.md).
+- **Submitting issues:** To submit bug reports or feature requests, please open a GitHub Issue in the relevant Deltakit package repository. For example, if your query is related to `deltakit-compile`, please open an Issue in the [`deltakit-compile` repository](https://github.com/Deltakit/deltakit-compile/issues), and similarly for issues related to [`deltakit-visualise`](https://github.com/Deltakit/deltakit-visualise/issues) and other Deltakit packages. If the issue does not fall under a specific Deltakit package, you can report it in the [issue tracker](https://github.com/Deltakit/deltakit/issues) of this repository. This is the appropriate place to also report issues about documentation related to *any* Deltakit package.
+- **Developing in `deltakit`:** To learn more about how to develop within `deltakit`, please refer to our [contributing guidelines](./docs/CONTRIBUTING.md). Deltakit provides shortcuts for common development tasks via [`just`](https://github.com/casey/just) (e.g., `just check`, `just lint`, `just test`, `just build`). Run `just --list` to view all available commands.
 - **Security:** For any security concern, please see our [security policy](./docs/SECURITY.md).
 
 > [!NOTE]
-> Any contribution will require a Contribution Licence Agreement signature when a Pull Request is created. The recommended contributing workflow is detailed in our [contributing guidelines](./docs/CONTRIBUTING.md).
+> Any contribution will require a Contributor License Agreement signature when a Pull Request is created. The recommended contributing workflow is detailed in our [contributing guidelines](./docs/CONTRIBUTING.md).
 
 ## License
 

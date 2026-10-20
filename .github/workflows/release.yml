@@ -57,7 +57,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
+        python-version: ['3.11', '3.12', '3.13', '3.14', '3.15']
         os:
           - 'ubuntu-latest'
           - 'windows-latest'
@@ -65,6 +65,10 @@ jobs:
         dependency-resolution:
           - 'highest'
           - 'lowest-direct'
+        # Temporary exclusion until a dependency (PyMatching) supports Py3.15.
+        exclude:
+          - os: windows-latest
+            python-version: '3.15'
     steps:
       - name: Check out deltakit repository
         uses: actions/checkout@v7
@@ -79,20 +83,11 @@ jobs:
           pattern: ${{ env.pkg_name }}
           path: ./dist/
           merge-multiple: true
-      - name: Install and test on Unix
-        if: matrix.os != 'windows-latest'
+      - name: Install and test on all OSes
+        shell: bash
         run: |
           uv sync --python ${{ matrix.python-version }} --resolution ${{matrix.dependency-resolution}} --group test --find-links ./dist/
           uv pip install ./dist/deltakit*.whl
-          uv run --python ${{ matrix.python-version }} --no-sync pytest .
-          uv run python -c "import deltakit"
-      - name: Install and test on Windows
-        if: matrix.os == 'windows-latest'
-        run: |
-          uv sync --python ${{ matrix.python-version }} --resolution ${{matrix.dependency-resolution}} --group test --find-links ./dist/
-          cd dist
-          uv pip install deltakit*.whl
-          cd ..
           uv run --python ${{ matrix.python-version }} --no-sync pytest .
           uv run python -c "import deltakit"
 
@@ -115,7 +110,7 @@ jobs:
           merge-multiple: true
       - name: Test install and imports
         run: |
-          uv venv --python 3.10
+          uv venv --python 3.11
           uv pip install --pre dist/*.tar.gz --find-links ./dist/
           uv run python -c "import deltakit"
 

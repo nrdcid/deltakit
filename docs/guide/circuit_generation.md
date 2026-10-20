@@ -35,7 +35,7 @@ By running quality simulations with realistic noise models you may predict how t
 Deltakit provides you with a set of classes and functions, which enable various experiment generation.
 You may use our existing functionality or build your own on top of existing code.
 
-## 1. Generating a quantum memory experiments with planar codes
+## 1. Generating quantum memory experiments with planar codes
 
 Quantum Memory Experiment (QMEM) is a core benchmark for both QPU hardware and decoders.
 Logical Error Probability (LEP) value, derived from the experiment, is influenced by both
@@ -49,9 +49,9 @@ The code below generates the circuit for a 5-qubit repetition code, representing
 5-qubit code is defined as distance-3 code: this is the number of error-corrected data qubits in this code.
 We will generate 3 rounds of error correction, which means that detectors (auxiliary or ancillary qubits)
 will be reset, entangled with data qubits, and measured. This will repeat 3 times.
-In the end of the experiment, all data qubits will be measured as well. One of them will be used as
+At the end of the experiment, all data qubits will be measured as well. One of them will be used as
 a representative of the logical qubit state.
-In this experiment we assume, that data qubits are initialised as $\vert 000\rangle$ and should remain in the same state.
+In this experiment we assume that data qubits are initialised as $\vert 000\rangle$ and should remain in the same state.
 If one of them (chosen as an observable) due to noise in the system flips its value to $\vert 1\rangle$, then
 a good decoder should be able to predict this event.
 
@@ -195,7 +195,7 @@ iswap_qmem_circuit.as_stim_circuit().diagram("timeline-svg-html")
 And now you may compile these circuits within `*SWAP` gates domain.
 
 ```{code-cell} ipython3
-czwap_qpu_instance = QPU(
+czswap_qpu_instance = QPU(
     qubits=iswap_qmem_circuit.qubits,  # only qubits we need are defined
     native_gates_and_times=NativeGateSetAndTimes(
         # times are given approximately for a superconducting device
@@ -208,8 +208,8 @@ czwap_qpu_instance = QPU(
     noise_model=NoiseParameters(),
 )
 
-deltakit_czswap_qmen = czwap_qpu_instance.compile_circuit(iswap_qmem_circuit)
-deltakit_czswap_qmen.as_stim_circuit().diagram("timeline-svg-html")
+deltakit_czswap_qmem = czswap_qpu_instance.compile_circuit(iswap_qmem_circuit)
+deltakit_czswap_qmem.as_stim_circuit().diagram("timeline-svg-html")
 ```
 
 ## 2. Stability experiment
@@ -243,7 +243,7 @@ In this experiment you remove Pauli gates (`X`, `Y`, `Z`, `I`).
 Pauli gate effect on the result of simulations can be tracked classically, so in the
 context of a Stim simulation (or a simple experiment on a real QPU) they may be removed,
 thus making execution faster (without loss of correctness).
-You prefer to keep Pauli gates, if you plan to run the experiment in other simulators or using real QPUs.
+You may prefer to keep Pauli gates if you plan to run the experiment in other simulators or using real QPUs.
 
 ```{code-cell} ipython3
 from deltakit_explorer.codes import BivariateBicycleCode
